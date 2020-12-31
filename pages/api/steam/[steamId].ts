@@ -28,7 +28,6 @@ const getSteamProfile = async (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader("Content-Type", "application/json");
     // SteamのAPIは帰ってくる順番が適当なのでソートする
     res.end(JSON.stringify(players.sort(compare)));
-    return response;
 };
 
 export default getSteamProfile;

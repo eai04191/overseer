@@ -40,8 +40,8 @@ const IndexPage = () => {
             <Nav />
             {steamProfile && (
                 <>
-                    "現在アカウント:" + {steamProfile.personaname}
-                    <爆破 />
+                    "現在アカウント:" {steamProfile.personaname}
+                    <爆破 profile={steamProfile}/>
                 </>
             )}
             <div className="py-20">

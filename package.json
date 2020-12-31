@@ -9,6 +9,7 @@
     "dependencies": {
         "next": "latest",
         "next-auth": "^3.1.0",
+        "rcon-client": "^4.2.3",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "swr": "^0.3.11",
