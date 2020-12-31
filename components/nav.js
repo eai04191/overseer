@@ -2,11 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/client";
 
-const links = [
-    { href: "https://github.com/vercel/next.js", label: "GitHub" },
-    { href: "https://nextjs.org/docs", label: "Docs" },
-];
-
 export default function Nav() {
     const [session, loading] = useSession();
     return (
