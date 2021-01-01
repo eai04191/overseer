@@ -7,7 +7,7 @@ export const SignIn = () => {
     return (
         <div
             className={clsx(
-                "relative flex flex-col p-4 border-2 border-gray-200 rounded-lg shadow-md",
+                "relative flex flex-col p-4 border-2 border-gray-200 rounded-lg shadow",
                 session && "pointer-events-none opacity-50"
             )}
         >
