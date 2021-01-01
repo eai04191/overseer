@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Rcon } from "rcon-client";
 
 const getSteamProfile = async (req: NextApiRequest, res: NextApiResponse) => {
-    const key = process.env.STEAM_API_KEY;
     const {
         query: { steamId, accessToken },
     } = req;
@@ -14,7 +13,7 @@ const getSteamProfile = async (req: NextApiRequest, res: NextApiResponse) => {
         });
         return;
     }
-    if (!check({ steamId, discordAccessToken: accessToken })) {
+    if (!(await check({ steamId, discordAccessToken: accessToken }))) {
         res.status(501).json({
             error: `自分のではないsteamIdを送信しようとしている`,
         });
