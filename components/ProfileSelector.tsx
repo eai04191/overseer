@@ -37,8 +37,11 @@ export const ProfileSelector = ({
             <div className="mt-2 space-y-2">
                 {profiles.map((profile) => (
                     <div onClick={() => handler(profile)}>
-                        <div className="flex p-4 border rounded-md shadow-sm space-x-4">
-                            <div className="flex shadow-sm">
+                        <div className="flex items-center p-2 border rounded-md shadow-sm space-x-2 md:p-4 md:space-x-4">
+                            <div
+                                className="flex flex-grow-0 flex-shrink-0 rounded-md shadow-sm"
+                                style={{ height: "52px" }}
+                            >
                                 <Image
                                     className="rounded-md"
                                     src={profile.avatarfull}
@@ -46,17 +49,23 @@ export const ProfileSelector = ({
                                     height={52}
                                 />
                             </div>
-                            <div className="flex flex-col justify-end space-y-1">
-                                <div className="text-black font-medium leading-6">
+                            <div className="flex flex-col flex-shrink justify-end min-w-0">
+                                <div className="text-black font-medium leading-6 truncate">
                                     {profile.personaname}
                                 </div>
-                                <div className="text-sm leading-snug">
+                                {/* <div className="text-gray-500 text-sm leading-snug overflow-x-auto">
+                                    {profile.steamid}
+                                </div> */}
+                                <div className="whitespace-nowrap text-sm leading-snug overflow-x-auto">
                                     <a
                                         href={profile.profileurl}
                                         target="_blank"
                                         className="text-blue-400"
                                     >
-                                        {profile.profileurl}
+                                        {profile.profileurl.replace(
+                                            "https://",
+                                            ""
+                                        )}
                                     </a>
                                 </div>
                             </div>
