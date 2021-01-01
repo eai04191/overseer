@@ -8,14 +8,14 @@ const getSteamProfile = async (req: NextApiRequest, res: NextApiResponse) => {
     // console.log(req.query);
 
     if (Array.isArray(steamId) || Array.isArray(accessToken)) {
-        res.status(501).json({
-            error: `steamid及びaccessTokenは配列であってはいけない`,
+        res.status(400).json({
+            error: `steamId及びaccessTokenは配列であってはいけない`,
         });
         return;
     }
     if (!(await check({ steamId, discordAccessToken: accessToken }))) {
-        res.status(501).json({
-            error: `自分のではないsteamIdを送信しようとしている`,
+        res.status(400).json({
+            error: `自分のではないSteamIDをキックしようとしている`,
         });
         return;
     }
