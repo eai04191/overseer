@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import Nav from "../components/nav";
-import ProfileSelector from "../components/ProfileSelector";
+import { Nav } from "../components/Nav";
+import { ProfileSelector } from "../components/ProfileSelector";
 import { signIn, useSession } from "next-auth/client";
-// import { useDiscordConnections } from "../lib/swr";
 import useSWR from "swr";
-import 爆破 from "../components/爆破";
+import { 爆破 } from "../components/爆破";
 
 const IndexPage = () => {
     const [session, loading] = useSession();
@@ -41,7 +40,7 @@ const IndexPage = () => {
             {steamProfile && (
                 <>
                     "現在アカウント:" {steamProfile.personaname}
-                    <爆破 profile={steamProfile}/>
+                    <爆破 profile={steamProfile} />
                 </>
             )}
             <div className="py-20">

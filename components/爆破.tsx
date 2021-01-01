@@ -9,7 +9,7 @@ const fire = ({ profile: profile, token: token }) => {
         .then((body) => alert(body.message));
 };
 
-const 爆破 = ({ profile }) => {
+export const 爆破 = ({ profile }) => {
     const [session] = useSession();
     return (
         <div
@@ -20,5 +20,3 @@ const 爆破 = ({ profile }) => {
         </div>
     );
 };
-
-export default 爆破;

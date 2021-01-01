@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSteamProfiles } from "../lib/swr";
 
-const ProfileSelector = ({
+export const ProfileSelector = ({
     steamId,
     handler,
 }: {
@@ -42,5 +41,3 @@ const ProfileSelector = ({
     handler(profiles[0]);
     return <></>;
 };
-
-export default ProfileSelector;

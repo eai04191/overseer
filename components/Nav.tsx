@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/client";
 
-export default function Nav() {
-    const [session, loading] = useSession();
+export const Nav = () => {
+    const [session] = useSession();
     return (
         <nav className="relative bg-white">
             <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 space-x-10">
@@ -43,4 +43,4 @@ export default function Nav() {
             </div>
         </nav>
     );
-}
+};
