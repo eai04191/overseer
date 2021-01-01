@@ -5,14 +5,12 @@ export const ProfileSelector = ({
     steamId,
     handler,
 }: {
-    steamId: number | number[];
-    handler: (steamProfile: any) => void;
+    steamId: string[];
+    handler: (steamProfile: SteamProfile) => void;
 }): JSX.Element => {
-    console.log(steamId);
-
-    const id = typeof steamId === "number" ? steamId : steamId.join(",");
-    console.log(id);
-    const { profiles, isLoading, isError } = useSteamProfiles(id);
+    const { profiles, isLoading, isError } = useSteamProfiles(
+        steamId.join(",")
+    );
 
     if (isLoading) return <p>Steamから情報を取得中……</p>;
     if (isError) return <p>Steamから情報を取得中にエラーが発生しました</p>;

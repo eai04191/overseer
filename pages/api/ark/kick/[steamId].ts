@@ -6,7 +6,7 @@ const getSteamProfile = async (req: NextApiRequest, res: NextApiResponse) => {
     const {
         query: { steamId, accessToken },
     } = req;
-    console.log(req.query);
+    // console.log(req.query);
 
     if (Array.isArray(steamId) || Array.isArray(accessToken)) {
         res.status(501).json({

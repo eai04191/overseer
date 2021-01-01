@@ -49,7 +49,7 @@ const options = {
         // signIn: async (user, account, profile) => { return Promise.resolve(true) },
         // redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
         // session: async (session, user, sessionToken) => {
-        //     console.log(sessionToken);
+        //     // console.log(sessionToken);
         //     session.bar = 'HILL';
         //     return Promise.resolve(session);
         //},

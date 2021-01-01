@@ -19,10 +19,10 @@ export const useDiscordConnections = (accessToken) => {
 };
 
 export const useSteamProfiles = (steamId: string | number) => {
-    console.log(steamId);
+    // console.log(steamId);
     const fetcher = (url) => fetch(url).then((response) => response.json());
 
-    const { data, error } = useSWR(`/api/steam/${steamId}`, fetcher);
+    const { data, error } = useSWR<SteamProfile[], Error>(`/api/steam/${steamId}`, fetcher);
 
     return {
         profiles: data,

@@ -1,7 +1,6 @@
 import { useSession } from "next-auth/client";
 
 const fire = ({ profile: profile, token: token }) => {
-    console.log(profile.steamid);
     fetch(`/api/ark/kick/${profile.steamid}?accessToken=${token}`, {
         method: "POST",
     })

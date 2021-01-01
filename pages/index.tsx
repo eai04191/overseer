@@ -7,31 +7,30 @@ import { 爆破 } from "../components/爆破";
 
 const IndexPage = () => {
     const [session, loading] = useSession();
-    const [connections, setConnections] = useState<number[] | null>(null);
+    const [linkedSteamIds, setLinkedSteamIds] = useState<string[] | null>(null);
     const [steamProfile, setSteamProfile] = useState(null);
     const setSteamProfileHandle = (profile) => {
         setSteamProfile(profile);
     };
 
-    const { data, error } = useSWR(
+    const { data, error } = useSWR<string[], Error>(
         session ? "https://discord.com/api/users/@me/connections" : null,
         (url) =>
             fetch(url, {
                 headers: { Authorization: `Bearer ${session.accessToken}` },
             })
                 .then((response) => response.json())
-                .then((connections) => {
+                .then((connections: DiscordConnectionEntry[]) => {
                     return connections
                         .filter((connection) => connection.type == "steam")
                         .map((connection) => connection.id);
                 })
     );
 
-    console.log(data);
-
     useEffect(() => {
         if (!data) return;
-        setConnections(data);
+        console.log(data);
+        setLinkedSteamIds(data);
     }, [data]);
 
     return (
@@ -44,18 +43,10 @@ const IndexPage = () => {
                 </>
             )}
             <div className="py-20">
-                {/* {connections ? (
-                    <ProfileSelector steamId={connections} />
-                ) : session ? (
-                    "Discordから接続情報を取得中..."
-                ) : (
-                    "ログインしてください"
-                )} */}
-
                 {!session && "ログインしてください"}
-                {session && connections && (
+                {session && linkedSteamIds && (
                     <ProfileSelector
-                        steamId={connections}
+                        steamId={linkedSteamIds}
                         handler={setSteamProfileHandle}
                     />
                 )}
