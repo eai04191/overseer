@@ -6,6 +6,7 @@ import { useSession } from "next-auth/client";
 import useSWR from "swr";
 import { 爆破 } from "../components/爆破";
 import { SignIn } from "../components/SignIn";
+import Head from "next/head";
 
 const IndexPage = () => {
     const [session, loading] = useSession();
@@ -44,6 +45,18 @@ const IndexPage = () => {
 
     return (
         <div>
+            <Head>
+                <title>Overseer</title>
+                <meta
+                    name="viewport"
+                    content="initial-scale=1.0, width=device-width"
+                />
+                <meta property="og:title" content="Overseer" />
+                <meta
+                    name="description"
+                    content="Overseer is a web app for small ARK servers. Players can log in with their Discord account and kick themselves."
+                />
+            </Head>
             <Nav />
             <div className="container mx-auto px-4 py-4 space-y-4">
                 <SignIn />
@@ -57,6 +70,7 @@ const IndexPage = () => {
                             <Image
                                 className="rounded-md"
                                 src="/images/connect_steam_profile_to_discord.png"
+                                alt=""
                                 width={1058}
                                 height={237}
                             />
