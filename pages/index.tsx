@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Nav } from "../components/Nav";
 import { ProfileSelector } from "../components/ProfileSelector";
-import { signIn, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import useSWR from "swr";
 import { 爆破 } from "../components/爆破";
+import { SignIn } from "../components/SignIn";
 
 const IndexPage = () => {
     const [session, loading] = useSession();
@@ -36,20 +37,23 @@ const IndexPage = () => {
     return (
         <div>
             <Nav />
-            {steamProfile && (
-                <>
-                    "現在アカウント:" {steamProfile.personaname}
-                    <爆破 profile={steamProfile} />
-                </>
-            )}
-            <div className="py-20">
-                {!session && "ログインしてください"}
-                {session && linkedSteamIds && (
-                    <ProfileSelector
-                        steamId={linkedSteamIds}
-                        handler={setSteamProfileHandle}
-                    />
+            <div className="container mx-auto px-4 py-4">
+                <SignIn />
+                {steamProfile && (
+                    <>
+                        "現在アカウント:" {steamProfile.personaname}
+                        <爆破 profile={steamProfile} />
+                    </>
                 )}
+                <div className="py-20">
+                    {!session && "ログインしてください"}
+                    {session && linkedSteamIds && (
+                        <ProfileSelector
+                            steamId={linkedSteamIds}
+                            handler={setSteamProfileHandle}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );
