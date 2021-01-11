@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Nav } from "../components/Nav";
 import Image from "next/image";
 import { ProfileSelector } from "../components/ProfileSelector";
-import { useSession } from "next-auth/client";
+import { useSession, signOut } from "next-auth/client";
 import useSWR from "swr";
 import { 爆破 } from "../components/爆破";
 import { SignIn } from "../components/SignIn";
@@ -17,17 +17,28 @@ const IndexPage = () => {
     };
     const [noConnection, setNoConnection] = useState(false);
 
-    const { data, error } = useSWR<string[], Error>(
+    const { data, error } = useSWR<string[] | void, Error>(
         session ? "https://discord.com/api/users/@me/connections" : null,
         (url) =>
             fetch(url, {
                 headers: { Authorization: `Bearer ${session.accessToken}` },
             })
+                .then((response) => {
+                    if (!response.ok) throw new Error(response.statusText);
+                    return response;
+                })
                 .then((response) => response.json())
                 .then((connections: DiscordConnectionEntry[]) => {
                     return connections
                         .filter((connection) => connection.type == "steam")
                         .map((connection) => connection.id);
+                })
+                .catch((error) => {
+                    alert(
+                        "Discordとの通信中にエラーが発生しました。再ログインしてください。\n\n" +
+                            error.message
+                    );
+                    signOut();
                 })
     );
 
