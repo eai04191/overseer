@@ -5,10 +5,18 @@ const fire = ({ profile: profile, token: token }) => {
     return fetch(`/api/ark/kick/${profile.steamid}?accessToken=${token}`, {
         method: "POST",
     })
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw Error(
+                    "Kickに失敗しました。設定を見直してください。\n\n" +
+                        response.statusText
+                );
+            }
+            return response.json();
+        })
         .then((body) => body.message)
         .catch((error) => {
-            "Kickに失敗しました。設定を見直してください。\n\n" + error;
+            "ネットワークエラーが発生しました" + error;
         });
 };
 
