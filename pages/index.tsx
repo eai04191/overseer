@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ProfileSelector } from "../components/ProfileSelector";
 import { useSession, signOut } from "next-auth/client";
 import useSWR from "swr";
-import { 爆破 } from "../components/爆破";
+import { KickButton } from "../components/Kick";
 import { SignIn } from "../components/SignIn";
 import Head from "next/head";
 
@@ -99,7 +99,7 @@ const IndexPage = () => {
                         <h2 className="text-lg font-bold">3. Kick Yourself!</h2>
                         現在選択されているアカウント: {steamProfile.personaname}
                         <br />
-                        <爆破 profile={steamProfile} />
+                        <KickButton profile={steamProfile} />
                     </div>
                 )}
             </div>

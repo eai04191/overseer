@@ -34,14 +34,18 @@ const kick = async (steamId: string) => {
     const port = parseInt(process.env.ARK_RCON_PORT);
     const password = process.env.ARK_RCON_PASSWORD;
 
-    const rcon = await Rcon.connect({
-        host,
-        port,
-        password,
-    });
-    const response = await rcon.send(`KickPlayer ${steamId}`);
-    rcon.end();
-    return response.trim();
+    try {
+        const rcon = await Rcon.connect({
+            host,
+            port,
+            password,
+        });
+        const response = await rcon.send(`KickPlayer ${steamId}`);
+        rcon.end();
+        return response.trim();
+    } catch (error) {
+        return error.message;
+    }
 };
 
 const check = async ({
