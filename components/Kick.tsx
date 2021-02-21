@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSession } from "next-auth/client";
+import clsx from "clsx";
 
 const fire = ({ profile: profile, token: token }) => {
     return fetch(`/api/ark/kick/${profile.steamid}?accessToken=${token}`, {
@@ -25,8 +26,12 @@ export const KickButton = ({ profile }) => {
     const [session] = useSession();
     return (
         <div
-            className="inline-flex items-center justify-center px-4 py-2 text-red-100 bg-red-500 border-red-600 rounded-md shadow-sm"
+            className={clsx(
+                "inline-flex items-center justify-center px-4 py-2 text-red-100 bg-red-500 border-red-600 rounded-md shadow-sm",
+                waiting ? "opacity-75" : "cursor-pointer"
+            )}
             onClick={async () => {
+                if (waiting) return;
                 setWaiting(true);
                 const message = await fire({
                     profile,

@@ -40,6 +40,7 @@ const kick = async (steamId: string) => {
             port,
             password,
         });
+        console.log(rcon);
         const response = await rcon.send(`KickPlayer ${steamId}`);
         rcon.end();
         return response.trim();
