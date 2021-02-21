@@ -19,8 +19,9 @@ const getSteamProfile = async (req: NextApiRequest, res: NextApiResponse) => {
         });
         return;
     }
-
+    console.log("trying kick...");
     const response = await kick(steamId);
+    console.log("kicked.");
 
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
@@ -35,12 +36,16 @@ const kick = async (steamId: string) => {
     const password = process.env.ARK_RCON_PASSWORD;
 
     try {
-        const rcon = await Rcon.connect({
+        const rcon = new Rcon({
             host,
             port,
             password,
         });
+        console.log("rcon instance ready.");
         console.log(rcon);
+        console.log("trying to connect...");
+        await rcon.connect();
+        console.log("connected!");
         const response = await rcon.send(`KickPlayer ${steamId}`);
         rcon.end();
         return response.trim();
